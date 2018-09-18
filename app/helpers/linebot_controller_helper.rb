@@ -1,0 +1,2 @@
+module LinebotControllerHelper
+end
