@@ -13,9 +13,11 @@ class LinebotController < ApplicationController
 
   def callback
     body = request.body.read
+    logger.info(body)
+
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
-    unless client.validate_signature(body, signature)
+    if ENV["RAILS_ENV"] == "production" && !client.validate_signature(body, signature)
       error 400 do 'Bad Request' end
     end
 
