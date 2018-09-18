@@ -1,2 +1,2 @@
-module LinebotControllerHelper
+module LinebotHelper
 end
