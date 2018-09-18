@@ -13,8 +13,13 @@ class LinebotController < ApplicationController
 
   def callback
     body = request.body.read
-    logger.info(body)
-
+    logger.info("**********************************************")
+    logger.error(request.body.read)
+    logger.info("**************************")
+    logger.error(request.body.read)
+    logger.info("**************************")
+    logger.error(request.body.read.to_json)
+    logger.info("**************************")
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     if ENV["RAILS_ENV"] == "production" && !client.validate_signature(body, signature)
