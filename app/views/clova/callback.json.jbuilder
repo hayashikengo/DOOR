@@ -5,7 +5,7 @@ json.response do |response|
     outputSpeech.values do |values|
       values.type "PlainText"
       values.lang "ja"
-      values.value "お母さんからの連絡です。。。"
+      values.value @voice_message
     end
     outputSpeech.card {}
     outputSpeech.directives []
