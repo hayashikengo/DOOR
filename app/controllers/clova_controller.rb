@@ -8,26 +8,28 @@ class ClovaController < ApplicationController
     render 'clova/callback', formats: 'json', handlers: 'jbuilder'
   end
 
-  def send_push_message(to_user)
-    message = {
-      type: 'text',
-      text: 'hello'
-    }
-    response = client.push_message(to_user.line_user_id, message)
-    p response
-  end
-
   private
 
   def send_message
     if to_user = @clova.user
+      # クローバスキルが呼び出された時に返す返答
       # TODO メッセージを送信する
       send_push_message(to_user)
-      @voice_message = "#{to_user.name}からの連絡です。。。"
-                     + "冷蔵庫の中にご飯があるので、チンしてね！"
+      @voice_message = "#{to_user.name}からの連絡です。。。" + "冷蔵庫の中にご飯があるので、チンしてね！"
     else
       @voice_message = "LINEBotのDOOR(Perent)で設定を行ってください。"
     end
+  end
+
+  # DOOR(Parent)へのプッシュ通知
+  def send_push_message(to_user)
+    text_message = "#{to_user.name}さんからの伝言をお伝えしました！"
+    message = {
+      type: 'text',
+      text: text_message
+    }
+    response = client.push_message(to_user.line_user_id, message)
+    p response
   end
 
   def set_clova
