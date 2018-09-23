@@ -1,6 +1,7 @@
 class ClovaController < ApplicationController
 
   def callback
-    head :ok
+
+    render 'clova/callback', formats: 'json', handlers: 'jbuilder'
   end
 end
