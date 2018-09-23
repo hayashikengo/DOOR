@@ -11,16 +11,22 @@ class LinebotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          message = {
-            type: 'text',
-            text: event.message['text']
-          }
-          client.reply_message(event['replyToken'], message)
+          text_message = event.message['text']
+          @user.add_messages(text_message)
+          send_reply_message(event['replyToken'],text_message)
         end
       end
     }
 
     head :ok
+  end
+
+  def send_reply_message(replay_token, message_text)
+    message = {
+      type: 'text',
+      text: message_text + "\n\n以上を伝言板に登録しました！"
+    }
+    client.reply_message(replay_token, message)
   end
 
   def set_user(line_user_id)
