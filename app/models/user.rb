@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :user_clovas
   has_many :clovas, through: :user_clovas
+  has_many :messages#, dependent: :destroy
 
   # TODO ユーザー名取得
   # validates :name, uniqueness: true, presence: true
@@ -22,8 +23,13 @@ class User < ApplicationRecord
     user
   end
 
-  def add_messages()
-    
+
+  def shoud_send_message
+
+  end
+
+  def add_messages
+
   end
 
   def clova
