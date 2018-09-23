@@ -9,11 +9,16 @@ class ClovaController < ApplicationController
     # p response
     body = request.body.read
     # p request
-    p body
+    p '*' * 50
+    p body.keys
     p '*' * 50
     p body['session']
 
 
     render 'clova/callback', formats: 'json', handlers: 'jbuilder'
+  end
+
+  def set_clova(line_user_id)
+    @clova = Clova.find_and_set_line_user_id(line_user_id)
   end
 end
