@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :user_clovas
   has_many :clovas, through: :user_clovas
-  has_many :messages#, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   # TODO ユーザー名取得
   # validates :name, uniqueness: true, presence: true
@@ -23,13 +23,9 @@ class User < ApplicationRecord
     user
   end
 
-
-  def shoud_send_message
-
-  end
-
-  def add_messages
-
+  # クローバで伝えるメッセージを保存
+  def add_messages(text_message)
+    self.messages.create(text: text_message)
   end
 
   def clova
