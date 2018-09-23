@@ -22,9 +22,12 @@ class LinebotController < ApplicationController
   end
 
   def send_reply_message(replay_token, message_text)
+    replay_message_text = @user.clova ?
+                     message_text + "\n以上を伝言板に登録しました！" :
+                     "clovaをアプリで登録してください。"
     message = {
       type: 'text',
-      text: message_text + "\n\n以上を伝言板に登録しました！"
+      text:replay_message_text
     }
     client.reply_message(replay_token, message)
   end
