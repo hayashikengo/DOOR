@@ -34,4 +34,8 @@ class LinebotController < ApplicationController
 
     head :ok
   end
+
+  def set_user(line_user_id)
+    @user = UserClova.find_or_create_by(line_user_id: line_user_id).user
+  end
 end
