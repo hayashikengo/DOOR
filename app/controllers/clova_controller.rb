@@ -10,9 +10,8 @@ class ClovaController < ApplicationController
     body = request.body.read
     # p request
     p '*' * 50
-    p body.keys
+    p params
     p '*' * 50
-    p body['session']
 
 
     render 'clova/callback', formats: 'json', handlers: 'jbuilder'
