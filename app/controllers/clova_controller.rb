@@ -4,13 +4,18 @@ class ClovaController < ApplicationController
 
   def callback
     if to_user = @clova.user
-      # クローバスキルが呼び出された時に返す返答
-      # TODO メッセージを送信する
+      # ラインボットへ通知を送る
       send_push_message(to_user)
-      @voice_message = "#{to_user.name}からの連絡です。。。"
-      to_user.messages.should_send.each.with_index(1) do |i, message|
-        # @voice_message += "#{i}件目です。"
-        @voice_message += messages
+
+      # クローバスキルが呼び出された時に返す返答
+      if messages = to_user.messages.presence
+        @voice_message = "#{to_user.name}からの連絡です。。。"
+        to_user.messages.should_send.each.with_index(1) do |i, message|
+          # @voice_message += "#{i}件目です。"
+          @voice_message += messages
+        end
+      else
+        @voice_message = "現在、伝言板にメッセージはありません。"
       end
     else
       @voice_message = "LINEBotのDOOR(Perent)で伝言板に追加してください。"
