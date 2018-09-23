@@ -10,9 +10,9 @@ class ClovaController < ApplicationController
       # クローバスキルが呼び出された時に返す返答
       if messages = to_user.messages.presence
         @voice_message = "#{to_user.name}からの連絡です。。。"
-        to_user.messages.should_send.each.with_index(1) do |i, message|
+        to_user.messages.should_send.each.with_index(1) do |message, i|
           # @voice_message += "#{i}件目です。"
-          @voice_message += messages
+          @voice_message += message.text
         end
       else
         @voice_message = "現在、伝言板にメッセージはありません。"
