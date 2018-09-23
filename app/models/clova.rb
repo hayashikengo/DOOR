@@ -1,0 +1,2 @@
+class Clova < ApplicationRecord
+end
