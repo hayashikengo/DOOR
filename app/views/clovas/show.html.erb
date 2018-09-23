@@ -3,6 +3,10 @@
 <p>
   <strong>Name:</strong>
   <%= @clova.name %>
+  <strong>Line user id:</strong>
+  <%= @clova.line_user_id %>
+  <strong>User name:</strong>
+  <%= @clova.user&.name %>
 </p>
 
 <%= link_to 'Edit', edit_clova_path(@clova) %> |
