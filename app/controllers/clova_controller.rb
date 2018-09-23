@@ -26,7 +26,6 @@ class ClovaController < ApplicationController
       @voice_message = "#{to_user.name}からの連絡です。。。"
                      + "冷蔵庫の中にご飯があるので、チンしてね！"
     else
-      # TODO 「DOOR(Perent)でメッセージを送ってください」
       @voice_message = "LINEBotのDOOR(Perent)で設定を行ってください。"
     end
   end
