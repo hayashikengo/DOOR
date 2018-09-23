@@ -19,6 +19,8 @@ class LinebotController < ApplicationController
     events = client.parse_events_from(body)
 
     events.each { |event|
+      puts event['source']['userId']
+      set_user(event['source']['userId'])
       case event
       when Line::Bot::Event::Message
         case event.type
@@ -36,6 +38,8 @@ class LinebotController < ApplicationController
   end
 
   def set_user(line_user_id)
-    @user = UserClova.find_or_create_by(line_user_id: line_user_id).user
+    @user = UserClova.find_or_create_by(line_user_id: line_user_id).users.first
+    p @users
+    @user = users.create(name: "hoge") if @user
   end
 end
