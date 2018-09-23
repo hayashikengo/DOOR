@@ -38,8 +38,6 @@ class LinebotController < ApplicationController
   end
 
   def set_user(line_user_id)
-    @user = UserClova.find_or_create_by(line_user_id: line_user_id).users.first
-    p @users
-    @user = users.create(name: "hoge") if @user
+    @user = User.find_and_set_line_user_id(line_user_id)
   end
 end
