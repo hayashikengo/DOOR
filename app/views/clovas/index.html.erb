@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Line user</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
     <% @clovas.each do |clova| %>
       <tr>
         <td><%= clova.name %></td>
+        <td><%= clova.line_user_id %></td>
         <td><%= link_to 'Show', clova %></td>
         <td><%= link_to 'Edit', edit_clova_path(clova) %></td>
         <td><%= link_to 'Destroy', clova, method: :delete, data: { confirm: 'Are you sure?' } %></td>

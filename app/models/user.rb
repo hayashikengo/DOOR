@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   # TODO ユーザー名取得
   # validates :name, uniqueness: true, presence: true
+  validates :line_user_id, uniqueness: true, presence: true
 
   def self.find_and_set_line_user_id(line_user_id)
     user = User.find_or_create_by(line_user_id: line_user_id)
