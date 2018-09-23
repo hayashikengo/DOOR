@@ -8,9 +8,11 @@ class Clova < ApplicationRecord
   def self.find_and_set_line_user_id(line_user_id)
     clova = Clova.find_or_create_by(line_user_id: line_user_id)
 
-    # 同じuserIdのUserが存在する場合は、関連を追加
-    user = User.find_by(line_user_id: line_user_id)
-    clova.users << user if user
+    unless clova.user
+      # 同じuserIdのUserが存在する場合は、関連を追加
+      user = User.find_by(line_user_id: line_user_id)
+      clova.users << user if user
+    end
 
     clova
   end

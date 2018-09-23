@@ -13,9 +13,11 @@ class User < ApplicationRecord
       user.name = "名無し"
     end
 
-    # 同じuserIdのClovaが存在する場合は、関連を追加
-    clova = Clova.find_by(line_user_id: line_user_id)
-    user.clovas << clova if clova
+    unless user.clova
+      # 同じuserIdのClovaが存在する場合は、関連を追加
+      clova = Clova.find_by(line_user_id: line_user_id)
+      user.clovas << clova if clova
+    end
 
     user
   end
