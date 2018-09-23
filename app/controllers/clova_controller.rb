@@ -3,14 +3,6 @@ class ClovaController < ApplicationController
   before_action :set_clova, only: [:callback]
 
   def callback
-    send_message
-
-    render 'clova/callback', formats: 'json', handlers: 'jbuilder'
-  end
-
-  private
-
-  def send_message
     if to_user = @clova.user
       # クローバスキルが呼び出された時に返す返答
       # TODO メッセージを送信する
@@ -19,7 +11,11 @@ class ClovaController < ApplicationController
     else
       @voice_message = "LINEBotのDOOR(Perent)で設定を行ってください。"
     end
+
+    render 'clova/callback', formats: 'json', handlers: 'jbuilder'
   end
+
+  private
 
   # DOOR(Parent)へのプッシュ通知
   def send_push_message(to_user)

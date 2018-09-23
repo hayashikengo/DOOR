@@ -22,6 +22,10 @@ class User < ApplicationRecord
     user
   end
 
+  def add_messages()
+    
+  end
+
   def clova
     self.clovas.first
   end
