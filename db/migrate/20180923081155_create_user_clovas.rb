@@ -3,6 +3,7 @@ class CreateUserClovas < ActiveRecord::Migration[5.2]
     create_table :user_clovas do |t|
       t.references :user, foreign_key: true
       t.references :clova, foreign_key: true
+      t.string :line_user_id, uniqueness: true
 
       t.timestamps
     end
