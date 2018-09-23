@@ -8,9 +8,10 @@ class ClovaController < ApplicationController
     # response = client.push_message("userId", message)
     # p response
     body = request.body.read
-    p request
-    p '*' * 50
+    # p request
     p body
+    p '*' * 50
+    p body['session']
 
 
     render 'clova/callback', formats: 'json', handlers: 'jbuilder'
