@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   # callbackアクションのCSRFトークン認証を無効
   protect_from_forgery except: [:callback]
+  before_action :basic, except: [:callback]
   before_action :line_bot_auth, only: [:callback]
   # before_action :logger_request, only: [:callback]
 
@@ -45,5 +46,11 @@ class ApplicationController < ActionController::Base
     puts "*" * 50
     puts request
     puts "*" * 50
+  end
+
+  def basic
+    authenticate_or_request_with_http_basic do |user, pass|
+      user == ENV['DOOR_BASIC_ID'] && pass == ENV['DOOR_BASIC_PASS']
+    end
   end
 end
