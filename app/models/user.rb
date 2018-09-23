@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
     # 同じuserIdのClovaが存在する場合は、関連を追加
     clova = Clova.find_by(line_user_id: line_user_id)
-    user.clovas < clova if clova
+    user.clovas << clova if clova
 
     user
   end

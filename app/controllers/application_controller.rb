@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
-      error 400 do 'Bad Request' end
+      puts "Error: bad_request"
+      # bad_request
     end
   end
 
@@ -18,6 +19,26 @@ class ApplicationController < ActionController::Base
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
     }
+  end
+
+  # 400 bad_request
+  def bad_request
+    return head :bad_request
+  end
+
+  # 401 unauthorized
+  def unauthorized
+    return head :unauthorized
+  end
+
+  # 403 forbidden
+  def forbidden
+    return head :forbidden
+  end
+
+  # 404 not_found
+  def not_found
+    return head :not_found
   end
 
   def logger_request()

@@ -13,14 +13,14 @@ class ClovaController < ApplicationController
     render 'clova/callback', formats: 'json', handlers: 'jbuilder'
   end
 
-  # def send_push_message(to_user)
-  #   message = {
-  #     type: 'text',
-  #     text: 'hello'
-  #   }
-  #   response = client.push_message(to_user.line_user_id, message)
-  #   p response
-  # end
+  def send_push_message(to_user)
+    message = {
+      type: 'text',
+      text: 'hello'
+    }
+    response = client.push_message(to_user.line_user_id, message)
+    p response
+  end
 
   def set_clova
     line_user_id = params['session']['user']['userId']
