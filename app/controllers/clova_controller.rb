@@ -9,7 +9,7 @@ class ClovaController < ApplicationController
 
       # クローバスキルが呼び出された時に返す返答
       if messages = to_user.messages.presence
-        @voice_message = "#{to_user.name}からの連絡です。。。"
+        @voice_message = "#{to_user.displayName}からの連絡です。。。"
         to_user.messages.should_send.each.with_index(1) do |message, i|
           # @voice_message += "#{i}件目です。"
           @voice_message += message.text
@@ -28,7 +28,7 @@ class ClovaController < ApplicationController
 
   # DOOR(Parent)へのプッシュ通知
   def send_push_message(to_user)
-    text_message = "#{to_user.name}さんからの伝言をお伝えしました！"
+    text_message = "#{to_user.displayName}さんからの伝言をお伝えしました！"
     message = {
       type: 'text',
       text: text_message
