@@ -10,8 +10,7 @@ class User < ApplicationRecord
   def self.find_and_set_line_user_id(line_user_id)
     user = User.find_or_create_by(line_user_id: line_user_id)
     unless user.name
-      # TODO ユーザー名取得
-      user.name = "名無し"
+      get_line_user_profile
     end
 
     unless user.clova
@@ -21,6 +20,42 @@ class User < ApplicationRecord
     end
 
     user
+  end
+
+  def displayName
+    get_line_user_profile unless self.displayName
+
+    self.displayName
+  end
+
+  def pictureUrl
+    get_line_user_profile unless self.pictureUrl
+
+    self.pictureUrl
+  end
+
+  def get_line_user_profile
+    # TODO リファクタ
+    client = Line::Bot::Client.new { |config|
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    }
+    response = client.get_profile(self.line_user_id)
+    case response
+    when Net::HTTPSuccess then
+      contact = JSON.parse(response.body)
+      p contact['displayName']
+      p contact['pictureUrl']
+      p contact['statusMessage']
+      self.update_attributes(
+        displayName: contact['displayName'],
+        pictureUrl: contact['pictureUrl']
+      )
+      true
+    else
+      p "Error: #{response.code} #{response.body}"
+      false
+    end
   end
 
   # クローバで伝えるメッセージを保存
