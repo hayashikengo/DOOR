@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # callbackアクションのCSRFトークン認証を無効
   protect_from_forgery except: [:callback]
   before_action :basic, except: [:callback], if: :is_production?
-  before_action :line_bot_auth, only: [:callback]
+  # before_action :line_bot_auth, only: [:callback]
   # before_action :logger_request, only: [:callback]
 
   def line_bot_auth
@@ -11,8 +11,6 @@ class ApplicationController < ActionController::Base
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
       puts "Error: bad_request. Line invalidate signature."
-      p signature
-      p client.validate_signature(body, signature)
       bad_request
     end
   end
