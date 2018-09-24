@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # callbackアクションのCSRFトークン認証を無効
   protect_from_forgery except: [:callback]
-  before_action :basic, except: [:callback]
+  before_action :basic, except: [:callback], if: :is_production?
   before_action :line_bot_auth, only: [:callback]
   # before_action :logger_request, only: [:callback]
 
@@ -10,8 +10,10 @@ class ApplicationController < ActionController::Base
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
-      puts "Error: bad_request"
-      # bad_request
+      puts "Error: bad_request. Line invalidate signature."
+      p signature
+      p client.validate_signature(body, signature)
+      bad_request
     end
   end
 
@@ -52,5 +54,9 @@ class ApplicationController < ActionController::Base
     authenticate_or_request_with_http_basic do |user, pass|
       user == ENV['DOOR_BASIC_ID'] && pass == ENV['DOOR_BASIC_PASS']
     end
+  end
+
+  def is_production?
+    Rails.env == 'production'
   end
 end
