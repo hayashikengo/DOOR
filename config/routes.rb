@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :prefectures
   resources :messages
   resources :clovas
   resources :users
