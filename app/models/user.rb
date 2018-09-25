@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :user_clovas
   has_many :clovas, through: :user_clovas
   has_many :messages, dependent: :destroy
+  has_many :patrol_user_cities
+  has_many :cities, through: :patrol_user_cities
 
   validates :line_user_id, uniqueness: true, presence: true
 
