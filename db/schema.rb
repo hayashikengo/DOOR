@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_093055) do
+ActiveRecord::Schema.define(version: 2018_09_26_094123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 2018_09_25_093055) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "suspicious_person_infos", force: :cascade do |t|
+    t.datetime "published_at"
+    t.string "text"
+    t.bigint "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_suspicious_person_infos_on_city_id"
+  end
+
   create_table "user_clovas", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "clova_id"
@@ -74,6 +83,7 @@ ActiveRecord::Schema.define(version: 2018_09_25_093055) do
   add_foreign_key "cities", "prefectures"
   add_foreign_key "messages", "users"
   add_foreign_key "patrol_user_cities", "users"
+  add_foreign_key "suspicious_person_infos", "cities"
   add_foreign_key "user_clovas", "clovas"
   add_foreign_key "user_clovas", "users"
 end
