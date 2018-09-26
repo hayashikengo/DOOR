@@ -12,8 +12,21 @@ class LinebotController < ApplicationController
         case event.type
         when Line::Bot::Event::MessageType::Text
           text_message = event.message['text']
-          @user.add_messages(text_message)
-          send_reply_message(event['replyToken'],text_message)
+
+          case text_message
+          when /.*[市区町村].*(を追加して|を追加)/
+            @user.add_watch_city(city_name)
+          when /.*[市区町村].*(を削除して|を削除)/
+            @user.delete_watch_city(city_name)
+          when /不審者情報を教えて|不審者情報/
+            send_reply_message(event['replyToken'], reply_message_text)
+          else
+            @user.add_messages(message_text)
+            reply_message_text = @user.clova ?
+                           (message_text + "\n以上を伝言板に登録しました！") :
+                           "clovaをアプリで登録してください。"
+            send_reply_message(event['replyToken'], reply_message_text)
+          end
         end
       end
     }
@@ -21,13 +34,10 @@ class LinebotController < ApplicationController
     head :ok
   end
 
-  def send_reply_message(replay_token, message_text)
-    replay_message_text = @user.clova ?
-                     message_text + "\n以上を伝言板に登録しました！" :
-                     "clovaをアプリで登録してください。"
+  def send_reply_message(replay_token, reply_message_text)
     message = {
       type: 'text',
-      text:replay_message_text
+      text: reply_message_text
     }
     client.reply_message(replay_token, message)
   end
