@@ -16,30 +16,5 @@ namespace :patrol do
         binding.pry
       end
     end
-
-
-    # スクレイピング先のURL
-    # top_doc = getDoc('http://www.keishicho.metro.tokyo.jp/kurashi/higai/kodomo/fushin/index.html')
-    # # 日毎の詳細ページURL取得
-    # detail_urls = top_doc.css(".norcor").css("a").map{|a| a.attributes['href'].value}
-    #
-    # detail_urls.each do |detail_url|
-    #   binding.pry
-    #   detail_doc = getDoc(detail_url)
-    #   binding.pry
-    #   detail_doc
-    # end
   end
-
-  private
-
-  # def getDoc(url)
-  #   charset = nil
-  #   html = open(url) do |f|
-  #     charset = f.charset # 文字種別を取得
-  #     f.read # htmlを読み込んで変数htmlに渡す
-  #   end
-  #   # htmlをパース(解析)してオブジェクトを作成
-  #   Nokogiri::HTML.parse(html, nil, charset)
-  # end
 end
