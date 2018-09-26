@@ -11,19 +11,19 @@ class LinebotController < ApplicationController
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-          text_message = event.message['text']
+          message_text = event.message['text']
 
-          case text_message
+          case message_text
           when /機能を教えて/
-            reply_message_text = tell_func_text
+            message_text = tell_func_text
           when /登録地区を教えて/
             reply_message_text = watch_cities_text
-          when /.*[市区町村].*(を追加して|を追加)/
-            city_name = text_message[/.*[市区町村]/]
+          when /.*[市区町村].*(を追加して|を追加|を登録して|を登録)/
+            city_name = message_text[/.*[市区町村]/]
             @user.add_watch_city(city_name)
             reply_message_text = "#{city_name}の不審者情報を通知します。"
           when /.*[市区町村].*(を削除して|を削除)/
-            city_name = text_message[/.*[市区町村]/]
+            city_name = message_text[/.*[市区町村]/]
             @user.delete_watch_city(city_name)
             reply_message_text = "#{city_name}の不審者情報の通知を解除しました。"
           when /不審者情報を教えて|不審者情報/
@@ -63,8 +63,9 @@ class LinebotController < ApplicationController
   end
 
   def suspicious_person_info_text
+    suspicious_person_infos = @user.suspicious_person_infos.presence
     <<-EOS
-    #{@user.suspicious_person_infos}
+    #{suspicious_person_infos ? suspicious_person_infos : "現在不審者情報はありません。"}
 
     <登録地区>
     #{@user.cities.join(", ")}
