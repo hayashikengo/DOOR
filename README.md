@@ -1,3 +1,15 @@
+# Deploy
+```
+# db作成
+heroku run rails db:migrate
+
+# 東京都・市町村データのインポート
+# local
+rails prefecture:import_tokyo_cities
+# heroku
+heroku run rails prefecture:import_tokyo_cities
+```
+
 # Heroku
 ```
 #login
