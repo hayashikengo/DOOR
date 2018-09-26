@@ -48,7 +48,7 @@ class User < ApplicationRecord
     end
   end
 
-  # 通知する不審者情報の生成
+  # 通知する不審者情報のテキスト生成
   def suspicious_person_infos
     self.cities.map{ |city| city.suspicious_person_infos.last.text }.join("\n\n")
   end
