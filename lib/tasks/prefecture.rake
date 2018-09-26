@@ -9,7 +9,7 @@ namespace :prefecture do
     open("./lib/tasks/csv/tokyo_cities.csv", "rb:Shift_JIS:UTF-8", undef: :replace) do |f|
       CSV.new(f).each_with_index do |row, i|
         next if i == 0
-        prefecture.cities.find_or_create_by(name: row)
+        prefecture.cities.find_or_create_by(name: row[0])
       end
     end
     puts "Created Prefecture: #{Prefecture.count}, City: #{City.count}"
