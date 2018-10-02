@@ -34,4 +34,7 @@ echo $HEROKU_APP=oya-ko
 # heroku apps 変更
 heroku git:remote -a oya-ko
 heroku git:remote -a door-prop
+
+# heroku task
+heroku run rake patrol:tokyo_police_page
 ```

@@ -15,7 +15,7 @@ class LinebotController < ApplicationController
 
           case message_text
           when /機能を教えて/
-            message_text = tell_func_text
+            reply_message_text = tell_func_text
           when /登録地区を教えて/
             reply_message_text = watch_cities_text
           when /.*[市区町村].*(を追加して|を追加|を登録して|を登録)/
@@ -55,20 +55,19 @@ class LinebotController < ApplicationController
     EOS
   end
 
-  def watch_cities_text
-    <<-EOS
-    <登録地区>
-    #{@user.cities.join(", ")}
-    EOS
-  end
-
   def suspicious_person_info_text
-    suspicious_person_infos = @user.suspicious_person_infos.presence
+    suspicious_person_infos = @user.suspicious_person_infos_text.presence
     <<-EOS
     #{suspicious_person_infos ? suspicious_person_infos : "現在不審者情報はありません。"}
 
+    #{watch_cities_text}
+    EOS
+  end
+
+  def watch_cities_text
+    <<-EOS
     <登録地区>
-    #{@user.cities.join(", ")}
+    #{@user.cities.map(&:name).join(", ")}
     EOS
   end
 

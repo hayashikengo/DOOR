@@ -55,6 +55,7 @@ class User < ApplicationRecord
         suspicious_person_info.text
       }.join("\n")
     }.join("\n\n")
+    .gsub("\\n", "\n")
   end
 
   def set_line_user_profile
