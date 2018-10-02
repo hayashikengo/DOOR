@@ -1,0 +1,2 @@
+module SuspiciousPersonInfosHelper
+end

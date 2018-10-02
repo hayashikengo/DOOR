@@ -1,3 +1,15 @@
+# Deploy
+```
+# db作成
+heroku run rails db:migrate
+
+# 東京都・市町村データのインポート
+# local
+rails prefecture:import_tokyo_cities
+# heroku
+heroku run rails prefecture:import_tokyo_cities
+```
+
 # Heroku
 ```
 #login
@@ -22,4 +34,7 @@ echo $HEROKU_APP=oya-ko
 # heroku apps 変更
 heroku git:remote -a oya-ko
 heroku git:remote -a door-prop
+
+# heroku task
+heroku run rake patrol:tokyo_police_page
 ```

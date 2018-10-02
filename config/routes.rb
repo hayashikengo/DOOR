@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :suspicious_person_infos
+  resources :cities
+  resources :prefectures
   resources :messages
   resources :clovas
   resources :users

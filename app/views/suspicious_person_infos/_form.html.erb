@@ -1,0 +1,32 @@
+<%= form_with(model: suspicious_person_info, local: true) do |form| %>
+  <% if suspicious_person_info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(suspicious_person_info.errors.count, "error") %> prohibited this suspicious_person_info from being saved:</h2>
+
+      <ul>
+      <% suspicious_person_info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :published_at %>
+    <%= form.datetime_select :published_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :text %>
+    <%= form.text_field :text %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city_id %>
+    <%= form.text_field :city_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
