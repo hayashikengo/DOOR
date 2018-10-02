@@ -28,6 +28,8 @@ class LinebotController < ApplicationController
             reply_message_text = "#{city_name}の不審者情報の通知を解除しました。"
           when /不審者情報を教えて|不審者情報/
             reply_message_text = suspicious_person_info_text
+          when /今日の(不審者情報|不審者情報を教えて)/
+            reply_message_text = SuspiciousPersonInfo.today_infos_text
           else
             @user.add_messages(message_text)
             reply_message_text = @user.clova ?
