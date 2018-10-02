@@ -16,9 +16,9 @@ namespace :patrol do
         # input suspicious person infomation
         city_name = city_info.children.search('th > p').children.first.text
         suspicious_person_info_text = city_info.children.search('td > p').first.children.map{ |a| a.text }.reject(&:empty?).join('\n')
-
         if city = City.find_by(name: city_name)
-          city.suspicious_person_infos.create(text: suspicious_person_info_text, published_at: Time.now.beginning_of_day)
+          puts "find #{city_name}"
+          city.suspicious_person_infos.find_or_create_by(text: suspicious_person_info_text, published_at: Time.now.beginning_of_day)
         else
           puts "Error: Not found city name #{city_name}"
         end
