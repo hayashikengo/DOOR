@@ -61,6 +61,7 @@ EOS
     suspicious_person_infos = @user.suspicious_person_infos_text.presence
     <<-EOS
 #{suspicious_person_infos ? suspicious_person_infos : "現在不審者情報はありません。"}
+
 #{watch_cities_text.chomp}
 EOS
   end
