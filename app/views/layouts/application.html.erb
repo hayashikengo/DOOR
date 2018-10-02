@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>LineBot</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>LineBot</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <p>
-      <%= link_to root_path do %>
-        <img alt="DOOR" src="https://raw.githubusercontent.com/hkengo/DOOR/change/oyako_management/app/assets/images/DOOR_icon.png" width="80px" style="float:left;"/>
-        <br />
-        <h1> Management</h1>
-        <br />
-      <% end %>
-    </p>
+<body>
+  <div style="display: flex;">
+    <%= link_to root_path do %>
+      <img alt="DOOR" src="https://raw.githubusercontent.com/hkengo/DOOR/change/oyako_management/app/assets/images/DOOR_icon.png" width="80px" style="float:left;"/>
+      <h1 style="float:left;margin: 35px 15px"> Management</h1>
+    <% end %>
+    <%= link_to "ユーザー情報一覧", users_path, style: "margin: 35px 20px;"%>
+    <%= link_to "クローバ端末一覧", clovas_path, style: "margin: 35px 20px;"%>
+    <%= link_to "メッセージ一覧", messages_path, style: "margin: 35px 20px;" %>
+  </div>
 
-    <%= yield %>
-  </body>
+  <%= yield %>
+</body>
 </html>

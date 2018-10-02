@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :user_clovas
   has_many :clovas, through: :user_clovas
   has_many :messages, dependent: :destroy
+  has_many :patrol_user_cities
+  # TODO watch_cities にしたい
+  has_many :cities, -> { distinct }, through: :patrol_user_cities
 
   validates :line_user_id, uniqueness: true, presence: true
 
@@ -24,6 +27,36 @@ class User < ApplicationRecord
     end
 
     user
+  end
+
+  # 通知するCityの追加
+  def add_watch_city(city_name)
+    if city = City.find_by(name: city_name)
+      self.cities << city
+      true
+    else
+      false
+    end
+  end
+
+  def delete_watch_city(city_name)
+    if city = City.find_by(name: city_name)
+      self.cities.delete(city)
+      true
+    else
+      false
+    end
+  end
+
+  # 通知する不審者情報のテキスト生成
+  def suspicious_person_infos_text
+    text = []
+    self.cities.each do |city|
+      city.suspicious_person_infos.tell_targets.map do |suspicious_person_info|
+        text << suspicious_person_info.text
+      end
+    end
+    text.join("\n\n").gsub("\\n", "\n")
   end
 
   def set_line_user_profile

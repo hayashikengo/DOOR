@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Published at:</strong>
+  <%= @suspicious_person_info.published_at %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @suspicious_person_info.text %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @suspicious_person_info.city %>
+</p>
+
+<%= link_to 'Edit', edit_suspicious_person_info_path(@suspicious_person_info) %> |
+<%= link_to 'Back', suspicious_person_infos_path %>
