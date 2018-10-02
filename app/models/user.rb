@@ -54,7 +54,7 @@ class User < ApplicationRecord
       city.suspicious_person_infos.tell_targets.map{ |suspicious_person_info|
         suspicious_person_info.text
       }.join("\n")
-    }.join("\n\n")
+    }.join("\n")
     .gsub("\\n", "\n")
   end
 
