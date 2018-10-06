@@ -2,6 +2,7 @@ class ClovaController < ApplicationController
   require 'line/bot'
   before_action :set_clova, only: [:callback]
 
+  # TODO 「ねぇ、clova ドアくんをを開いて、ただいま」
   def callback
     if to_user = @clova.user
       # ラインボットへ通知を送る
