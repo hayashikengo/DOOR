@@ -8,7 +8,10 @@ class OpenWeatherMap
   # tokyo: key='id', val='1850147'
   # akashi: key='q', val='Akashi'
   def self.get(key = 'id', val = TOKYO_CITY_ID)
-    json_response = open(BASE_URL + "?#{key}=#{val}&APPID=#{ENV['Open_Weather_Map_API_KEY']}")
+    url = BASE_URL + "?#{key}=#{val}&APPID=#{ENV['Open_Weather_Map_API_KEY']}"
+
+    puts "Request method:GET, URL:#{url}"
+    json_response = open(url)
     JSON.parse(json_response.read)
   end
 end
