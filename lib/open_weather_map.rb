@@ -14,4 +14,9 @@ class OpenWeatherMap
     json_response = open(url)
     JSON.parse(json_response.read)
   end
+
+  # def self.get_icon_binary(icon)
+  #   url = "http://openweathermap.org/img/w/#{icon}.png"
+  #   open(url)
+  # end
 end
