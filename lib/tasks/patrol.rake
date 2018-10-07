@@ -21,7 +21,10 @@ namespace :patrol do
 
         if city = City.find_by(name: city_name)
           puts "find #{city_name}"
-          city.suspicious_person_infos.find_or_create_by(text: suspicious_person_info_text, published_at: Time.now.beginning_of_day)
+          city.suspicious_person_infos.find_or_create_by(
+            text: suspicious_person_info_text,
+            source_url: detail_urls,
+            published_at: Time.now.beginning_of_day)
         else
           puts "Error: Not found city name #{city_name}"
         end
@@ -43,10 +46,12 @@ namespace :patrol do
 
   def send_message_text(text, to)
     @line_bot_client ||= LineBotClient.new
-    @line_bot_client.pushMessage('text', text, to)
+    response = @line_bot_client.pushMessage('text', text, to)
+    puts "Sent message. to:#{to.displayName} line_user_id:#{to.line_user_id} response:#{response}"
   end
 
   def push_message_text(cities)
+    # TODO 不審者情報が見やすいようなページを作成
     tokyo_police_page = "http://www.keishicho.metro.tokyo.jp/kurashi/higai/kodomo/fushin/index.html"
     <<-EOS
 ＜不審者情報＞
