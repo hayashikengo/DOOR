@@ -15,7 +15,7 @@ namespace :patrol do
       city_infos.each do |city_info|
         # input suspicious person infomation
         city_name = city_info.children.search('th > p').children.first.text
-        suspicious_person_info_text = city_info.children.search('td > p').first.children.map{ |a| a.text }.reject(&:empty?).join('\n')
+        suspi_cious_person_info_text = city_info.children.search('td > p').first.children.map{ |a| a.text }.reject(&:empty?).join('\n')
         suspicious_person_info_text += "\n" + city_info.children.search('ul > li').first.children.map{ |a| a.text }.reject(&:empty?).join('\n')
 
         if city = City.find_by(name: city_name)
