@@ -20,7 +20,8 @@ namespace :weather do
           User.all.each_with_index do |user, i|
             next if user.line_user_id.blank?
             text = weather_message(weather).chomp
-            send_message_text(text, user.line_user_id)
+            response = send_message_text(text, user.line_user_id)
+            puts "Sent message. to:#{user.displayName} line_user_id:#{user.line_user_id} response:#{response}"
           end
         end
         pp "#{date_time} Next_weather: #{weather}"
