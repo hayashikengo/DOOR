@@ -1,5 +1,5 @@
 class  GoogleCloudTranslation
-  # OPTIMIZE テーブル作って、同じ情報はapi叩かない
+  # OPTIMIZE KVS
   def self.translate(string)
     url = URI.parse('https://www.googleapis.com/language/translate/v2')
     params = {
