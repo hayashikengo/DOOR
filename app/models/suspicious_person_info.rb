@@ -18,6 +18,19 @@ class SuspiciousPersonInfo < ApplicationRecord
     )
   }
 
+  def self.tell_infos
+    tell_infos = {}
+    # self.tell_targets.each do |suspicious_person_info|
+    self.all.each do |suspicious_person_info|
+      city = suspicious_person_info.city
+      city.users.each do |user|
+        tell_infos[user.line_user_id.to_s] = [] unless tell_infos[user.line_user_id.to_s].present?
+        tell_infos[user.line_user_id.to_s] << city unless tell_infos[user.line_user_id.to_s].include?(city)
+      end
+    end
+    tell_infos
+  end
+
   def self.today_infos_text
     SuspiciousPersonInfo.all.tell_targets.map{ |suspicious_person_info|
       suspicious_person_info.text
