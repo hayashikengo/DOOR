@@ -33,7 +33,7 @@ class LinebotController < ApplicationController
           else
             @user.add_messages(message_text)
             reply_message_text = @user.clova ?
-                           (message_text + "\n以上を伝言板に登録しました！") :
+                           "以上を伝言板に登録しました！" :
                            "clovaをアプリで登録してください。"
           end
           send_reply_message(event['replyToken'], reply_message_text.chomp)
