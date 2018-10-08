@@ -44,7 +44,8 @@ class ClovaController < ApplicationController
 
   # DOOR(Parent)へのプッシュ通知
   def send_push_message
-    text_message = "#{@to_user.displayName}さんからの伝言をお伝えしました！"
+    # text_message = "#{@to_user.displayName}さんからの伝言をお伝えしました！"
+    text_message = "あなたの伝言が読まれました！"
     message = {
       type: 'text',
       text: text_message
