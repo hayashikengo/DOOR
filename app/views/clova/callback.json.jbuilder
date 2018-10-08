@@ -7,10 +7,10 @@ json.response do |response|
       values.lang "ja"
       values.value @voice_message
     end
-    outputSpeech.card {}
-    outputSpeech.directives []
-    outputSpeech.shouldEndSession false
   end
+  response.card {}
+  response.directives []
+  response.shouldEndSession @shouldEndSession
 end
 
 # {

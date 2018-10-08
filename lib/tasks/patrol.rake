@@ -56,11 +56,10 @@ namespace :patrol do
 
   def create_message_text(cities)
     # TODO 不審者情報が見やすいようなページを作成
-    tokyo_police_page = "http://www.keishicho.metro.tokyo.jp/kurashi/higai/kodomo/fushin/index.html"
+    # tokyo_police_page = "http://www.keishicho.metro.tokyo.jp/kurashi/higai/kodomo/fushin/index.html"
     <<-EOS
 ＜不審者情報＞
 #{cities.map(&:name).join(', ')} にて不審者が確認されました。
-#{tokyo_police_page}
 EOS
   end
 end
