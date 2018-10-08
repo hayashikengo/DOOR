@@ -10,7 +10,7 @@ json.response do |response|
   end
   response.card {}
   response.directives []
-  response.shouldEndSession false
+  response.shouldEndSession @shouldEndSession
 end
 
 # {
