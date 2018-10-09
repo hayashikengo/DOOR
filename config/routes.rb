@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   root 'users#index'
   post '/linebot/callback' => 'linebot#callback'
   post '/clova/callback' => 'clova#callback'
+  post '/file/upload' => 'file#upload'
 end
