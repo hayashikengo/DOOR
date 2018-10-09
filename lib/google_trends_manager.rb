@@ -23,11 +23,14 @@ class GoogleTrendsManager
     # driver = Selenium::WebDriver.for :chrome, options: options
     # driver.navigate.to 'https://www.google.co.jp/'
     # driver.save_screenshot './google.png'
-    binding.pry
     
   end
 
-  def get_trends
+  # def get_trends
 
-  end
+  # end
+
+  # def get_trends_csv
+  #   @driver.find_elements(xpath: '/html/body/div[2]/div[2]/div/md-content/div/div/div[1]/trends-widget/ng-include/widget/div/div/div/widget-actions/div/button[1]').first
+  # end
 end
