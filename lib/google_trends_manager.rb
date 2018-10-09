@@ -17,7 +17,7 @@ class GoogleTrendsManager
     trends = {}
 
     CSV.foreach(@csv_file.path, headers: false).with_index do |row, i|
-      next if i < 2
+      next if i < 3
 
       time, score = row
       trends[time] = score
