@@ -31,3 +31,9 @@
 <br>
 <br>
 <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/1544_RC05/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"インフルエンザ","geo":"JP-13","time":"today 12-m"}],"category":0,"property":""}, {"exploreQuery":"q=%E3%82%A4%E3%83%B3%E3%83%95%E3%83%AB%E3%82%A8%E3%83%B3%E3%82%B6&geo=JP-13&date=today 12-m","guestPath":"https://trends.google.co.jp:443/trends/embed/"}); </script>
+
+<br>
+<%= form_tag({controller: "file", action: "upload", method: "post"}, {multipart: true}) do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "オブジェクトを一括インポート" %>
+<% end %>
